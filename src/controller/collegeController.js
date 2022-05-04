@@ -5,10 +5,10 @@ const isValid =function(value){
     if(typeof (value)=== undefined || typeof (value)=== null){
         return false;
     }
-    if(value.trim().length === 0){
+    if(value.trim().length=== 0){
         return false;
     }
-    if(typeof (value)=== "string" && (value).length === 0){
+    if(typeof (value)=== "string" && (value).length > 0){
         return true;
     }
 }
