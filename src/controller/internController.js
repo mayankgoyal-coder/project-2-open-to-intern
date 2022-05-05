@@ -17,9 +17,11 @@ const isValid =function(value){
 const createIntern = async function(req,res){
     try {
        const data = req.body
+
        if(Object.keys(data).length ==0){
            return res.status(400).send({status:false, msg: "Please Enter Your Information"})
        }
+
        if(!data.name){
         return res.status(400).send({status:false, msg: "Name is Required"}) 
     }
@@ -44,13 +46,17 @@ const createIntern = async function(req,res){
         return res.status(400).send({status:false, msg: "Mobile Number is already exist"})
        }
 
-       if(!data.collegeId){
-        return res.status(400).send({status:false, msg: "CollegeId should be present"}) 
+       if(!data.collegeName){
+        return res.status(400).send({status:false, msg: "CollegeName should be present"}) 
     }
-    const find = await collegeModel.findById(data.collegeId)
-    if(!find){
-        return res.status(404).send({status:false, msg: "Please Provide a Valid CollegeId"}) 
+    const find = await collegeModel.findOne({name:data.collegeName, isDeleted:false}).select({_id:1})
+    if(find.length<=0){
+        return res.status(404).send({status:false, msg: "No College Exist with this Name"}) 
     } 
+    
+    const id= find._id;
+    data.collegeId= id
+    
        const intern = await internModel.create(data)
        return res.status(201).send({status:true, data: intern})
    

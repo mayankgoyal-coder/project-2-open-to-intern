@@ -33,16 +33,17 @@ const internSchema = new mongoose.Schema(
               return /^(\+\d{1,3}[- ]?)?\d{10}$/.test(mobile);
           },
           message: "Please enter a valid Mobile Number", isAsync: false 
-        },
-
+        }
+      },
        collegeId: {
            type:ObjectId,
             ref: 'college' 
         },
         isDeleted: {
             type:Boolean, 
-            default: false}
-  },
+            default: false
+          }
+
 },{ timestamps: true }
 );
 
