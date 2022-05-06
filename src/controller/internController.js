@@ -33,6 +33,9 @@ const createIntern = async function(req,res){
        if(!data.email){
            return res.status(400).send({status:false, msg: "email should be present"}) 
        }
+       if(!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)){
+        return res.status(400).send({status:false, msg: "Please enter a valid email"}) 
+       }
        const duplicateEmail = await internModel.findOne({email:data.email})
        if(duplicateEmail){
         return res.status(400).send({status:false, msg: "email is already exist"})
@@ -40,6 +43,10 @@ const createIntern = async function(req,res){
 
        if(!data.mobile){
            return res.status(400).send({status:false, msg: "Mobile Number should be present"}) 
+       }
+       if(!/^(\+\d{1,3}[- ]?)?\d{10}$/.test(data.mobile)
+       ){
+        return res.status(400).send({status:false, msg:"Please enter a valid Mobile Number"})
        }
        const duplicateMobile = await internModel.findOne({mobile:data.mobile})
        if(duplicateMobile){

@@ -39,6 +39,9 @@ const createCollege = async function(req,res){
     if(!data.logoLink){
         return res.status(400).send({status:false, msg: "Logo Link is Required"}) 
     }
+    if(!/(:?^((https|http|HTTP|HTTPS){1}:\/\/)(([w]{3})[\.]{1})?([a-zA-Z0-9]{1,}[\.])[\w]*((\/){1}([\w@?^=%&amp;~+#-_.]+))*)$/.test(data.logoLink)){
+        return res.status(400).send({status:false, msg: "please enter a valid logo"}) 
+    }
     if(!isValid(data.logoLink)){
         return res.status(400).send({status:false, msg: "Please enter the Logo Link"}) 
     }

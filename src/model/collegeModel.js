@@ -19,6 +19,12 @@ const collegeSchema = new mongoose.Schema(
       type: String,
       trim: true,
       require: "Please Enter the Logo Link",
+      // validate:{
+      // validator : function(value) {
+      //   return   /(:?^((https|http|HTTP|HTTPS){1}:\/\/)(([w]{3})[\.]{1})?([a-zA-Z0-9]{1,}[\.])[\w]*((\/){1}([\w@?^=%&amp;~+#-_.]+))*)$/.test(value);
+      // },
+      // message: "please enter a valid logo",
+      // }
     },
 
     isDeleted: {
